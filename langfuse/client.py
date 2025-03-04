@@ -2118,6 +2118,20 @@ class Langfuse(object):
         except Exception as e:
             self.log.exception(e)
 
+    def optimize_prompt(self,
+                        initial_prompt, # промпт формата langfuse
+                        dataset,
+                        evaluation_data: dict):
+        model_config = initial_prompt.config
+        initial_prompt_text = initial_prompt.prompt
+        self.create_prompt(
+            name=initial_prompt.name,
+            type="text",
+            prompt=f"ОПТИМИЗИРОВАННЫЙ ПРОМПТ: {initial_prompt_text}",
+            labels=["latest"],
+            config=model_config
+        )
+
 
 class StateType(Enum):
     """Enum to distinguish observation and trace states.
